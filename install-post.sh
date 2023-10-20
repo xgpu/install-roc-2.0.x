@@ -8,7 +8,7 @@ sudo apt install python3-pip -y
 pip3 install meson
 export PATH=$HOME/.local/bin:$PATH
 
-git clone https://gitlab.freedesktop.org/mesa/drm.git
+git clone https://github.com/xgpu/drm.git
 cd drm
 mkdir build; cd build
 meson .. -Dintel=disabled -Dnouveau=disabled -Dvmwgfx=disabled --prefix=$HOME/.local/drm; ninja install
