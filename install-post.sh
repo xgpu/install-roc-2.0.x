@@ -2,8 +2,8 @@
 
 cd rxVega64fe
 # build libdrm
-sudo apt install libnuma-dev libpciaccess-dev ninja-build
-sudo apt install python3-pip
+sudo apt install libnuma-dev libpciaccess-dev ninja-build -y
+sudo apt install python3-pip -y
 pip3 install meson
 export PATH=$HOME/.local/bin:$PATH
 
@@ -13,7 +13,7 @@ mkdir build; cd build
 meson .. -Dintel=disabled -Dnouveau=disabled -Dvmwgfx=disabled --prefix=$HOME/.local/drm; ninja install
 
 # ROCT
-sudo apt install libpci-dev pkg-config
+sudo apt install libpci-dev pkg-config -y
 git clone https://github.com/xgpu/ROCT-Thunk-Interface.git -b roc-2.0.x
 cd ROCT-Thunk-Interface
 mkdir build; cd build
@@ -38,7 +38,7 @@ export LD_LIBRARY_PATH=$ROCR_PATH/hsa/lib:$LD_LIBRARY_PATH
 
 # get rocminfo.cpp
 export LD_LIBRARY_PATH=/home/aditya/.local/amd/rocr/hsa/lib/:$LD_LIBRARY_PATH
-g++ rocminfo.cpp  -I $ROCR_PATH/include -L $ROCR_PATH/hsa/lib -l hsa-runtime64
+g++ ../rocminfo.cpp  -I $ROCR_PATH/include -L $ROCR_PATH/hsa/lib -l hsa-runtime64
 
 # HCC
 # automatically fetches all submodules
