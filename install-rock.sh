@@ -10,6 +10,10 @@ cd ROCK-Kernel-Driver
 make rock-rel_defconfig
 make -j `nproc`; make modules -j `nproc`; make bindeb-pkg LOCALVERSION=-rxvega64fe -j `nproc`
 cd ..
-sudo dpkg -i *.deb
+sudo dpkg -i linux-headers-4.18.0-kfd-rxvega64fe_4.18.0-kfd-rxvega64fe-1_amd64.deb \
+linux-libc-dev_4.18.0-kfd-rxvega64fe-1_amd64.deb \
+linux-image-4.18.0-kfd-rxvega64fe_4.18.0-kfd-rxvega64fe-1_amd64.deb \
+linux-image-4.18.0-kfd-rxvega64fe-dbg_4.18.0-kfd-rxvega64fe-1_amd64.deb
+
 sudo usermod -a -G video $LOGNAME
 sudo systemctl reboot
