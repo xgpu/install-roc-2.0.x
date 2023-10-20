@@ -14,45 +14,46 @@ meson .. -Dintel=disabled -Dnouveau=disabled -Dvmwgfx=disabled --prefix=$HOME/.l
 cd ../..
 
 # ROCT
+export ROCT_PATH=$HOME/.local/amd/roct
 sudo apt install libpci-dev pkg-config -y
 git clone https://github.com/xgpu/ROCT-Thunk-Interface.git -b roc-2.0.x
 cd ROCT-Thunk-Interface
 mkdir build; cd build
-cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/.local/amd/roct
+cmake .. -DCMAKE_INSTALL_PREFIX=$ROCT_PATH
 make -j `nproc` install
 cd ..
-cp -r ./include $HOME/.local/amd/roct
+cp -r ./include $ROCT_PATH
 cd ..
 
-export ROCT_PATH=$HOME/.local/amd/roct
 export LD_LIBRARY_PATH=$ROCT_PATH/lib:$LD_LIBRARY_PATH
 
 # ROCR
+export ROCR_PATH=$HOME/.local/amd/rocr
 git clone https://github.com/xgpu/ROCR-Runtime.git -b roc-2.0.x
 cd ROCR-Runtime/src
 mkdir -p build; cd build
-cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$HOME/.local/amd/rocr -DHSAKMT_INC_PATH=$ROCT_PATH/include -DHSAKMT_LIB_PATH=$ROCT_PATH/lib
+cmake .. -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$ROCR_PATH -DHSAKMT_INC_PATH=$ROCT_PATH/include -DHSAKMT_LIB_PATH=$ROCT_PATH/lib
 make install -j `nproc`
 cd ../../../
 
-export ROCR_PATH=$HOME/.local/amd/rocr
-export LD_LIBRARY_PATH=$ROCR_PATH/hsa/lib:$LD_LIBRARY_PATH
+export HSA_PATH=$ROCR_PATH/hsa
+export LD_LIBRARY_PATH=$HSA_PATH/lib:$LD_LIBRARY_PATH
 
 # get rocminfo.cpp
-export LD_LIBRARY_PATH=/home/aditya/.local/amd/rocr/hsa/lib/:$LD_LIBRARY_PATH
-g++ ../rocminfo.cpp  -I $ROCR_PATH/include -L $ROCR_PATH/hsa/lib -l hsa-runtime64 -o rocminfo
+g++ ../rocminfo.cpp  -I $HSA_PATH/include -L $HSA_PATH/lib -lhsa-runtime64 -o rocminfo
 ./rocminfo
 
 # HCC
+export HCC_PATH=$HOME/.local/amd/hcc
 # automatically fetches all submodules
 git clone --recursive -b roc-2.0.x https://github.com/xgpu/hcc.git
 cd hcc
 mkdir build; cd build
-cmake -DCMAKE_BUILD_TYPE=Release .. -DCMAKE_INSTALL_PREFIX=$HOME/.local/amd/hcc  -DHSA_HEADER_DIR=$ROCR_PATH/hsa/include -DHSA_LIBRARY_DIR=$ROCR_PATH/hsa/lib -G Ninja
+cmake -DCMAKE_BUILD_TYPE=Release .. -DCMAKE_INSTALL_PREFIX=$HCC_PATH  -DHSA_HEADER_DIR=$HSA_PATH/include -DHSA_LIBRARY_DIR=$HSA_PATH/lib -DHSA_AMDGPU_GPU_TARGET=gfx900 -G Ninja
 ninja install
 cd ../..
 
-export HCC_HOME=$HOME/.local/amd/hcc
+export HCC_HOME=$HCC_PATH
 export PATH=$HCC_HOME/bin:$PATH
 export LD_LIBRARY_PATH=$HCC_HOME/lib:$LD_LIBRARY_PATH
 
