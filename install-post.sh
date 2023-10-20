@@ -20,8 +20,9 @@ cd ROCT-Thunk-Interface
 mkdir build; cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/.local/amd/roct
 make -j `nproc` install
-cd ../..
+cd ..
 cp -r ./include $HOME/.local/amd/roct
+cd ..
 
 export ROCT_PATH=$HOME/.local/amd/roct
 export LD_LIBRARY_PATH=$ROCT_PATH/lib:$LD_LIBRARY_PATH
