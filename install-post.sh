@@ -41,7 +41,7 @@ export HSA_PATH=$ROCR_PATH/hsa
 export LD_LIBRARY_PATH=$HSA_PATH/lib:$LD_LIBRARY_PATH
 
 # get rocminfo.cpp
-g++ ../rocminfo.cpp  -I $HSA_PATH/include -L $HSA_PATH/lib -lhsa-runtime64 -o rocminfo
+g++ ../../rocminfo.cpp  -I $HSA_PATH/include -L $HSA_PATH/lib -lhsa-runtime64 -o rocminfo
 ./rocminfo
 
 # HCC
