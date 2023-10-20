@@ -66,10 +66,20 @@ cmake .. -DHCC_HOME=$HCC_HOME -DHSA_PATH=$ROCR_PATH/hsa -DCMAKE_INSTALL_PREFIX=$
 make install -j `nproc`
 cd ../..
 
+
+export ROCT_PATH=$HOME/.local/amd/roct
+export LD_LIBRARY_PATH=$ROCT_PATH/lib:$LD_LIBRARY_PATH
+export ROCR_PATH=$HOME/.local/amd/rocr
+export HSA_PATH=$ROCR_PATH/hsa
+export LD_LIBRARY_PATH=$HSA_PATH/lib:$LD_LIBRARY_PATH
+export HCC_PATH=$HOME/.local/amd/hcc
+export HCC_HOME=$HCC_PATH
+export PATH=$HCC_HOME/bin:$PATH
+export LD_LIBRARY_PATH=$HCC_HOME/lib:$LD_LIBRARY_PATH
 export HIP_PATH=$HOME/.local/amd/hip
 
 # HIP Samples
 git clone https://github.com/xgpu/HIP-Examples.git
 cd HIP-Examples/vectorAdd
-$HIP_PATH/bin/hipcc vectoradd_hip.cpp --amdgpu-target=gfx900  -I /home/aditya/.local/amd/rocr/include -L $HOME/.local/amd/rocr/lib -lhsa-runtime64
+$HIP_PATH/bin/hipcc vectoradd_hip.cpp --amdgpu-target=gfx900
 ./a.out
