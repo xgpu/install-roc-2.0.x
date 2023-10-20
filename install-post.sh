@@ -40,7 +40,8 @@ export LD_LIBRARY_PATH=$ROCR_PATH/hsa/lib:$LD_LIBRARY_PATH
 
 # get rocminfo.cpp
 export LD_LIBRARY_PATH=/home/aditya/.local/amd/rocr/hsa/lib/:$LD_LIBRARY_PATH
-g++ ../rocminfo.cpp  -I $ROCR_PATH/include -L $ROCR_PATH/hsa/lib -l hsa-runtime64
+g++ ../rocminfo.cpp  -I $ROCR_PATH/include -L $ROCR_PATH/hsa/lib -l hsa-runtime64 -o rocminfo
+./rocminfo
 
 # HCC
 # automatically fetches all submodules
