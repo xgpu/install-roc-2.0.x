@@ -1,8 +1,7 @@
 
 ## starts here!
-mkdir -p rxVega64fe
-cd rxVega64fe
-mkdir -p pre
+mkdir -p rxVega64fe; cd rxVega64fe
+mkdir -p pre; cd pre
 
 sudo apt update; sudo apt upgrade -y;
 sudo apt install make cmake build-essential -y
