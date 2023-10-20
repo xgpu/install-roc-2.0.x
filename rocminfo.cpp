@@ -310,7 +310,7 @@ AcquireAgentInfo(hsa_agent_t agent, agent_info_t *agent_i) {
 
   // Get UUID, an Ascii string, of a ROCm device
   err = hsa_agent_get_info(agent,
-                         (hsa_agent_info_t)HSA_AMD_AGENT_INFO_UUID,
+                         (hsa_agent_info_t)HSA_AMD_AGENT_INFO_BDFID,
                                                    &agent_i->uuid);
 
   // Get device's vendor name
@@ -382,12 +382,6 @@ AcquireAgentInfo(hsa_agent_t agent, agent_info_t *agent_i) {
   err = hsa_agent_get_info(agent,
                            (hsa_agent_info_t) HSA_AMD_AGENT_INFO_CHIP_ID,
                                                            &agent_i->chip_id);
-  RET_IF_HSA_ERR(err);
-
-  // Get asic revision
-  err = hsa_agent_get_info(agent,
-                           (hsa_agent_info_t) HSA_AMD_AGENT_INFO_ASIC_REVISION,
-                                                           &agent_i->asic_revision);
   RET_IF_HSA_ERR(err);
 
   // Get cacheline size
