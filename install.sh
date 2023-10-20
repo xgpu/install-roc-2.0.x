@@ -1,4 +1,4 @@
-
+#!/bin/bash
 ## starts here!
 sudo apt update; sudo apt upgrade -y;
 sudo apt install make cmake build-essential -y
