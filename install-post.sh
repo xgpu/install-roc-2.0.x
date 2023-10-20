@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd rxVega64fe
 # build libdrm
 sudo apt install libnuma-dev libpciaccess-dev ninja-build
 sudo apt install python3-pip
