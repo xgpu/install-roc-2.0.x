@@ -11,6 +11,7 @@ git clone https://gitlab.freedesktop.org/mesa/drm.git
 cd drm
 mkdir build; cd build
 meson .. -Dintel=disabled -Dnouveau=disabled -Dvmwgfx=disabled --prefix=$HOME/.local/drm; ninja install
+cd ../..
 
 # ROCT
 sudo apt install libpci-dev pkg-config -y
@@ -19,7 +20,7 @@ cd ROCT-Thunk-Interface
 mkdir build; cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=$HOME/.local/amd/roct
 make -j `nproc` install
-cd ..
+cd ../..
 cp -r ./include $HOME/.local/amd/roct
 
 export ROCT_PATH=$HOME/.local/amd/roct
@@ -59,7 +60,7 @@ cd HIP
 mkdir build; cd build
 cmake .. -DHCC_HOME=$HCC_HOME -DHSA_PATH=$ROCR_PATH/hsa -DCMAKE_INSTALL_PREFIX=$HOME/.local/amd/hip
 make install -j `nproc`
-cd ../../
+cd ../..
 
 export HIP_PATH=$HOME/.local/amd/hip
 
